@@ -1,6 +1,6 @@
 [
     {
-        "caption": "Sort CSS via CSScomb",
+        "caption": "Sort via CSScomb",
         "command": "csscomb"
     }
 ]
