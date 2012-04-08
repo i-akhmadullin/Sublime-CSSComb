@@ -1,9 +1,14 @@
 [
     {
-        "id": "edit",
+        "id": "tools",
+        "caption": "Tools",
         "children":
         [
-            { "command": "csscomb" }
+            {
+                "id": "css_comb",
+                "caption": "Sort via CSScomb",
+                "command": "csscomb"
+            }
         ]
     }
 ]
