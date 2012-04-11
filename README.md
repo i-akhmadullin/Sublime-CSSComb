@@ -26,4 +26,4 @@
 
 ##Issues & bugs
 
-[https://github.com/i-akhmadullin/Sublime-CSSComb/issues](CSScomb for Sublime Text 2 tracker)
+[CSScomb for Sublime Text 2 tracker](https://github.com/i-akhmadullin/Sublime-CSSComb/issues)
