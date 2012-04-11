@@ -18,8 +18,8 @@
 
 Запуск сортировки стилей для текущего файла
 `ctrl + alt + shift + c`
-`ctrl + shift + p` -> `Sort via CSScomb`
-Выбрать в меню `Tools` -> `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
+`ctrl + shift + p` → `Sort via CSScomb`
+Выбрать в меню `Tools` → `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
 
 
 ##Issues & bugs
