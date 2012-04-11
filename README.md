@@ -4,7 +4,7 @@
 
 1. OS X, Linux или Windows на котором установлен [Sublime Text 2](http://www.sublimetext.com/2)
 
-2. PHP-интерпретатор. На OS X он установлен из коробки. А для Linux/Windows его нужно скачать с официального сайта [php.net](http://windows.php.net/download/) и добавить путь до папки куда вы установили PHP в переменную окружения $PATH. Подробнее о том, как это сделать на Windows читайте [тут](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.notepad_plus_plus/README.mkd).
+2. PHP-интерпретатор. На OS X он установлен из коробки. А для Linux/Windows его нужно скачать с официального сайта [php.net](http://windows.php.net/download/) и добавить путь до папки куда вы установили PHP в переменную окружения $PATH.  Подробнее о том, как это сделать на Windows читайте [тут](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.notepad_plus_plus/README.mkd).
 
 ## Установка
 
@@ -17,7 +17,7 @@
 
 Запуск сортировки стилей для текущего файла
 
-`ctrl + alt + shift + c`
+`ctrl + shift + c`  
 `ctrl + shift + p` → `Sort via CSScomb`
 
 Выбрать в меню `Tools` → `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
