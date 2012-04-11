@@ -1,22 +1,28 @@
-# CSScomb плагин для  Sublime Text 2
+# CSScomb для Sublime Text 2
+
+## Требования к окружению
+
+1. OS X, Linux или Windows на котором установлен [Sublime Text 2](http://www.sublimetext.com/2)
+
+2. PHP-интерпретатор. На OS X он установлен из коробки. А для Linux/Windows его нужно скачать с официального сайта [php.net](http://windows.php.net/download/) и добавить путь до папки куда вы установили PHP в переменную окружения $PATH. Подробнее о том, как это сделать на Windows читайте [тут](https://github.com/miripiruni/CSScomb/blob/master/src/plugins/csscomb.notepad_plus_plus/README.mkd).
+
+## Установка
+
+1. Скачиваем последнюю версию [плагина CSScomb для Sublime Text 2](https://github.com/i-akhmadullin/Sublime-CSSComb)
+
+2. В Sublime открываем: `Preferences` → `Browse Packages...` Откроется папка с примерно таким адресом `C:\Users\user\AppData\Roaming\Sublime Text 2\Packages`. Создаем в этой папке папку `CSScomb`, копируем в нее файлы плагина.
 
 
-## Установка:
+##Использование
 
-1. Скачать PHP с официального сайта [php.net](http://windows.php.net/download/)  
-Добавить путь до папки куда вы установили PHP в переменную окружения PATH
+Запуск сортировки стилей для текущего файла
 
-2. Скачиваем последнюю версию [плагина CSScomb для Sublime Text 2](https://github.com/i-akhmadullin/Sublime-CSSComb)
+`ctrl + alt + shift + c`
+`ctrl + shift + p` → `Sort via CSScomb`
 
-3. В Sublime открываем: `Preferences` -> `Browse Packages...` ( Откроется папка с примерно таким адресом `C:\Users\user\AppData\Roaming\Sublime Text 2\Packages` ) Создаем в этой папке папку `CSScomb`, копируем в нее файлы плагина  
-**Другой способ**. Скачать [sublime-package](https://github.com/i-akhmadullin/Sublime-CSSComb/downloads), положить его в `AppData\Roaming\Sublime Text 2\Installed Packages` и перезапустить редактор.
-
-4. В случае проблем проверяем правильно установлен PHP и настроен ли путь до него
+Выбрать в меню `Tools` → `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
 
 
-##Использование: 
+##Issues & bugs
 
-Запуск сортировки стилей для текущего файла  
-`ctrl + alt + shift + c`  
-`ctrl + shift + p` -> `Sort via CSScomb`  
-Выбрать в меню `Tools` -> `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
+[CSScomb for Sublime Text 2 tracker](https://github.com/i-akhmadullin/Sublime-CSSComb/issues)
