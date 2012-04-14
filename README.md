@@ -15,12 +15,10 @@
 
 ##Использование
 
-Запуск сортировки стилей для текущего файла
+Выбрать строки со стилями, которые надо отсортировать (желательно целиком с селектором и скобками)
 
 `ctrl + shift + c`  
-`ctrl + shift + p` → `Sort via CSScomb`
-
-Выбрать в меню `Tools` → `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
+или в меню `Tools` → `Sort via CSScomb`, либо `Sort via CSScomb` в контекстном меню
 
 
 ##Issues & bugs
