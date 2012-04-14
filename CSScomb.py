@@ -1,34 +1,92 @@
-import sublime, sublime_plugin,sys,subprocess
-from os import path
+import sublime, sublime_plugin
+from csscomb import BaseSort
 
-import subprocess
+class BaseSorter(sublime_plugin.TextCommand):
+    """Base Sorter"""
 
-__file__ = path.normpath(path.abspath(__file__))
-__path__ = path.dirname(__file__)
-libs_path = path.join(__path__, 'libs')
-csscomb_path = path.join(libs_path,"csscomb.php")
-
-class CsscombCommand(sublime_plugin.TextCommand):
+    def __init__(self, view):
+        self.view = view
+        # self.settings = sublime.load_settings("Minifier.sublime-settings")
 
     def run(self, edit):
-        view = self.view
-        #self.view.begin_edit()
-        filepath = view.file_name()
-        view.set_status('CSScomb', 'Sorting via CSScomb started...')
-        process = subprocess.Popen(['php', csscomb_path,filepath], shell=False, stdout=subprocess.PIPE)
 
-        try:
-            return_code = process.wait()
-            if return_code < 0:
-                sublime.error_message('Sorting probably was terminated')
-            else:
-                view.erase_status('CSScomb')
-                sublime.status_message('Sorting via CSScomb finished succesfully.')
-                sublime.set_timeout(self.reload_,250)
-        except OSError, e:
-            sublime.error_message('Error during sorting via CSScomb')
+        selections = self.get_selections()
 
-        #self.view.end_edit(edit)
+        threads = []
+        for sel in selections:
+            selbody = self.view.substr(sel)
 
-    def reload_(self):
-        self.view.run_command('revert')
+            thread = BaseSort(sel,selbody)
+
+            threads.append(thread)
+            thread.start()
+
+        selections.clear()
+        self.handle_threads(edit, threads, selections, offset=0, i=0)
+
+    def get_selections(self):
+        selections = self.view.sel()
+
+        # check if the user has any actual selections
+        has_selections = False
+        for sel in selections:
+            if sel.empty() == False:
+                has_selections = True
+
+        # if not, add the entire file as a selection
+        if not has_selections:
+            full_region = sublime.Region(0, self.view.size())
+            selections.add(full_region)
+
+        return selections
+
+    def handle_threads(self, edit, threads, selections, offset = 0, i = 0):
+
+        next_threads = []
+        for thread in threads:
+            if thread.is_alive():
+                next_threads.append(thread)
+                continue
+            if thread.result == False:
+                continue
+            self.handle_result(edit, thread, selections, offset)
+        threads = next_threads
+
+        if len(threads):
+            sublime.set_timeout(lambda: self.handle_threads(edit, threads, selections, offset, i), 100)
+            return
+
+        self.view.end_edit(edit)
+        sublime.status_message('Successfully sorted')
+
+
+    def handle_result(self, edit, thread, selections, offset):
+        sel = thread.sel
+        original = thread.original
+        # print original
+        result = thread.result
+        # print result
+
+        if thread.error is True:
+            sublime.error_message(result)
+            return
+        elif result is None:
+            sublime.error_message("There was an error sorting CSS.")
+            return
+
+        return thread
+
+
+class CssSorter(BaseSorter):
+
+    def handle_result(self, edit, thread, selections, offset):
+        result = super(CssSorter, self).handle_result(edit, thread, selections, offset)
+
+        editgroup = self.view.begin_edit('csscomb')
+
+        sel = thread.sel
+        result = thread.result
+        # if offset:
+            # sel = sublime.Region(thread.sel.begin() + offset, thread.sel.end() + offset)
+
+        self.view.replace(edit, sel, result)

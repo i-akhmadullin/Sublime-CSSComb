@@ -7,7 +7,7 @@
             {
                 "id": "css_comb",
                 "caption": "Sort via CSScomb",
-                "command": "csscomb"
+                "command": "css_sorter"
             }
         ]
     },
