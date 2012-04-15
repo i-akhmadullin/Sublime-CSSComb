@@ -10,28 +10,26 @@ CSS-кода с помощью алгоритма [CSScomb](http://csscomb.ru).
         <td>
             До CSScomb:
 
-            ```
-            header h1 {
-                display:inline-block;
-                color:#333;
-                background:#eee;
-                margin:0 20px;
-                position:relative;
-                }
-            ```
+<pre>
+header h1 {
+    display:inline-block;
+    color:#333;
+    background:#eee;
+    margin:0 20px;
+    position:relative;
+    }</pre>
         </td>
         <td>
             После CSScomb:
 
-            ```
-            header h1 {
-                position:relative;
-                display:inline-block;
-                margin:0 20px;
-                background:#eee;
-                color:#333;
-                }
-            ```
+<pre>
+header h1 {
+    position:relative;
+    display:inline-block;
+    margin:0 20px;
+    background:#eee;
+    color:#333;
+    }</pre>
         </td>
     </tr>
 </table>
