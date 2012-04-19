@@ -1,13 +1,7 @@
 import sublime
 import sublime_plugin
 import threading
-import sys,subprocess
-from os import path
-
-__file__ = path.normpath(path.abspath(__file__))
-__path__ = path.dirname(__file__)
-libs_path = path.join(__path__, 'libs')
-csscomb_path = path.join(libs_path,"call_string.php")
+import urllib2
 
 class BaseSort(threading.Thread):
 
@@ -19,18 +13,17 @@ class BaseSort(threading.Thread):
         threading.Thread.__init__(self)
 
     def exec_request(self):
-        myprocess = subprocess.Popen(['php',csscomb_path,self.original], shell=False, stdout=subprocess.PIPE)
-        (sout,serr) = myprocess.communicate()
-        myprocess.wait()
-
-        if len(sout) > 0:
-            return sout
-        else:
-            return None
+        return
 
     def run(self):
         try:
             self.result = self.exec_request()
         except (OSError) as (e):
              self.error = True
-             self.result = 'Sorter Error: attempt to sort non-existent file'
+             self.result = 'CSScomb Error: attempt to sort non-existent file'
+        except (urllib2.HTTPError) as (e):
+            self.error = True
+            self.result = 'CSScomb Error: HTTP error %s contacting API' % (str(e.code))
+        except (urllib2.URLError) as (e):
+            self.error = True
+            self.result = 'CSScomb Error: ' + str(e.reason)

@@ -1,22 +1,23 @@
 import sublime, sublime_plugin
-from csscomb import BaseSort
+from csscomb import HerokuSort, HostedSort
 
 class BaseSorter(sublime_plugin.TextCommand):
     """Base Sorter"""
 
     def __init__(self, view):
         self.view = view
-        # self.settings = sublime.load_settings("Minifier.sublime-settings")
+        self.settings = sublime.load_settings("CSScomb.sublime-settings")
 
     def run(self, edit):
 
         selections = self.get_selections()
+        SorterCall = self.get_sorter();
 
         threads = []
         for sel in selections:
             selbody = self.view.substr(sel)
 
-            thread = BaseSort(sel,selbody)
+            thread = SorterCall(sel,selbody)
 
             threads.append(thread)
             thread.start()
@@ -39,6 +40,14 @@ class BaseSorter(sublime_plugin.TextCommand):
             selections.add(full_region)
 
         return selections
+
+    def get_sorter(self):
+        sorter = self.settings.get('sorter', "hosted")
+        sorters = {
+            'heroku': HerokuSort,
+            'hosted': HostedSort
+        }
+        return sorters[sorter] if sorter in sorters else sorters['hosted']
 
     def handle_threads(self, edit, threads, selections, offset = 0, i = 0):
 

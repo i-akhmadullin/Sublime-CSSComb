@@ -1,0 +1,5 @@
+{
+    // CSScomb sorter to use
+    // Accepted values are: heroku|hosted
+    "sorter": "heroku"
+}

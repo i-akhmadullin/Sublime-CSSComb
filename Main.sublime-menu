@@ -29,6 +29,22 @@
                         [
                             { "caption": "-" },
                             {
+                                "caption": "CSScomb Settings – Default",
+                                "command": "open_file",
+                                "args":
+                                {
+                                    "file": "${packages}/CSScomb/CSScomb.sublime-settings"
+                                }
+                            },
+                            {
+                                "caption": "CSScomb Settings – User",
+                                "command": "open_file",
+                                "args":
+                                {
+                                    "file": "${packages}/User/CSScomb.sublime-settings"
+                                }
+                            },
+                            {
                                 "command": "open_file",
                                 "args": {
                                         "file": "${packages}/CSScomb/Default (OSX).sublime-keymap",
