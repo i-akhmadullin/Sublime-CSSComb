@@ -14,7 +14,7 @@ class HostedSort(BaseSort):
 
     def exec_request(self):
         myprocess = subprocess.Popen(['php', csscomb_path, self.original], shell=False, stdout=subprocess.PIPE)
-        (sout,serr) = myprocess.communicate()
+        (sout, serr) = myprocess.communicate()
         myprocess.wait()
 
         if len(sout) > 0:

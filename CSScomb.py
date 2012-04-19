@@ -17,7 +17,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         for sel in selections:
             selbody = self.view.substr(sel)
 
-            thread = SorterCall(sel,selbody)
+            thread = SorterCall(sel, selbody)
 
             threads.append(thread)
             thread.start()
@@ -76,11 +76,11 @@ class BaseSorter(sublime_plugin.TextCommand):
         result = thread.result
         # print result
 
-        if thread.error is True:
+        if thread.error:
             sublime.error_message(result)
             return
         elif result is None:
-            sublime.error_message("There was an error sorting CSS.")
+            sublime.error_message('There was an error sorting CSS.')
             return
 
         return thread
