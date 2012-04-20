@@ -46,7 +46,7 @@ header h1 {
 
 1. OS X, Linux или Windows на котором установлен [Sublime Text 2](http://www.sublimetext.com/2).
 
-2. (Опционально, для работы оффлайн)PHP-интерпретатор. На OS X он установлен из коробки. А для Linux/Windows
+2. (Опционально, для работы оффлайн) PHP-интерпретатор. На OS X он установлен из коробки. А для Linux/Windows
    его нужно скачать с официального сайта [php.net](http://windows.php.net/download/)
    и добавить путь до папки куда вы установили PHP в переменную окружения $PATH.
    Подробнее о том, как это сделать на Windows читайте
@@ -80,7 +80,7 @@ header h1 {
 
 ## Переключение режима работы плагина
 
-Выбрать `Preferences` → `Package Settings` → `CSScomb` → `CSScomb Settings - Default`
+Выбрать `Preferences` → `Package Settings` → `CSScomb` → `CSScomb Settings - Default`  
 В открывшемся файле поправить в строке:  
 `"sorter": "heroku"`  
 значение после двоеточия на `"heroku"` - для онлайн-режима или `"hosted"` - для оффлайн-режима. 
