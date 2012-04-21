@@ -29,7 +29,7 @@
                         [
                             { "caption": "-" },
                             {
-                                "caption": "CSScomb Settings – Default",
+                                "caption": "Settings – Default",
                                 "command": "open_file",
                                 "args":
                                 {
@@ -37,7 +37,7 @@
                                 }
                             },
                             {
-                                "caption": "CSScomb Settings – User",
+                                "caption": "Settings – User",
                                 "command": "open_file",
                                 "args":
                                 {
