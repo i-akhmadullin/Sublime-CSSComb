@@ -80,7 +80,7 @@ header h1 {
 
 ## Переключение режима работы плагина
 
-Выбрать `Preferences` → `Package Settings` → `CSScomb` → `CSScomb Settings - Default`  
+Выбрать `Preferences` → `Package Settings` → `CSScomb` → `Settings - Default`  
 В открывшемся файле поправить в строке:  
 `"sorter": "heroku"`  
 значение после двоеточия на `"heroku"` - для онлайн-режима или `"hosted"` - для оффлайн-режима. 
