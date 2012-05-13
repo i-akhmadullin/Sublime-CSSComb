@@ -1,6 +1,21 @@
 [
     {
-        "caption": "Sort via CSScomb",
-        "command": "css_sorter"
+        "caption": "CSScomb",
+        "children":
+        [
+            {
+                "caption": "Sort CSS",
+                "command": "css_sorter"
+            },
+            { "caption": "-" },
+            {
+                "caption": "Switch to installed sorting",
+                "command": "change_sorter_to_local"
+            },
+            {
+                "caption": "Switch to server sorting",
+                "command": "change_sorter_to_heroku"
+            }
+        ]
     }
 ]

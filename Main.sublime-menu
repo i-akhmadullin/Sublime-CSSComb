@@ -29,6 +29,14 @@
                         [
                             { "caption": "-" },
                             {
+                                "caption": "Switch to installed sorting",
+                                "command": "change_sorter_to_local"
+                            },
+                            {
+                                "caption": "Switch to server sorting",
+                                "command": "change_sorter_to_heroku"
+                            },
+                            {
                                 "caption": "Settings – Default",
                                 "command": "open_file",
                                 "args":

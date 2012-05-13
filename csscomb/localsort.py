@@ -10,7 +10,7 @@ __path__ = path.dirname(__file__)
 libs_path = path.join(__path__, 'libs')
 csscomb_path = path.join(libs_path, 'call_string.php')
 
-class HostedSort(BaseSort):
+class LocalSort(BaseSort):
 
     def exec_request(self):
         startupinfo = None

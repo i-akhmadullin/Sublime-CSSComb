@@ -1,5 +1,5 @@
-import sublime, sublime_plugin
-from csscomb import HerokuSort, HostedSort
+import sublime, sublime_plugin,sys
+from csscomb import HerokuSort, LocalSort
 
 class BaseSorter(sublime_plugin.TextCommand):
     """Base Sorter"""
@@ -7,6 +7,9 @@ class BaseSorter(sublime_plugin.TextCommand):
     def __init__(self, view):
         self.view = view
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
+        if not self.settings.has('sorter'):
+            self.settings.set('sorter', 'local')
+        sublime.save_settings('CSScomb.sublime-settings')
 
     def run(self, edit):
 
@@ -45,7 +48,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         sorter = self.settings.get('sorter', "hosted")
         sorters = {
             'heroku': HerokuSort,
-            'hosted': HostedSort
+            'hosted': LocalSort
         }
         return sorters[sorter] if sorter in sorters else sorters['hosted']
 
@@ -99,3 +102,15 @@ class CssSorter(BaseSorter):
             # sel = sublime.Region(thread.sel.begin() + offset, thread.sel.end() + offset)
 
         self.view.replace(edit, sel, result)
+
+class ChangeSorterToLocalCommand(sublime_plugin.WindowCommand):
+    def run(self, paths = []):
+        self.settings = sublime.load_settings("CSScomb.sublime-settings")
+        self.settings.set("sorter", "local")
+        sublime.save_settings('CSScomb.sublime-settings')
+
+class ChangeSorterToHerokuCommand(sublime_plugin.WindowCommand):
+    def run(self, paths = []):
+        self.settings = sublime.load_settings("CSScomb.sublime-settings")
+        self.settings.set("sorter", "heroku")
+        sublime.save_settings('CSScomb.sublime-settings')

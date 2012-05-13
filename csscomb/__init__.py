@@ -1,3 +1,3 @@
 from basesort import BaseSort
-from hostedsort import HostedSort
+from localsort import LocalSort
 from herokusort import HerokuSort
