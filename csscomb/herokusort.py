@@ -9,7 +9,7 @@ class HerokuSort(BaseSort):
 
     def exec_request(self):
 
-        data = urllib.urlencode({ 'css': self.original.encode('utf-8') })
+        data = urllib.urlencode({ 'css': self.original })
         ua = 'Sublime Text 2 - CSScomb'
         req = urllib2.Request("http://csscomb.herokuapp.com/sort.php", data, headers = { 'User-Agent': ua })
         file = urllib2.urlopen(req, timeout=10)

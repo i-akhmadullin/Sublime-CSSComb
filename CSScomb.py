@@ -19,7 +19,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         threads = []
         for sel in selections:
             selbody = self.view.substr(sel)
-
+            selbody = selbody.encode('utf-8')
             thread = SorterCall(sel, selbody)
 
             threads.append(thread)
@@ -97,7 +97,7 @@ class CssSorter(BaseSorter):
         editgroup = self.view.begin_edit('csscomb')
 
         sel = thread.sel
-        result = thread.result
+        result = unicode(thread.result,'utf-8')
         # if offset:
             # sel = sublime.Region(thread.sel.begin() + offset, thread.sel.end() + offset)
 
