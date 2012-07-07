@@ -1,7 +1,6 @@
-import sublime
-import sublime_plugin
 import threading
 import urllib2
+
 
 class BaseSort(threading.Thread):
 
@@ -19,8 +18,8 @@ class BaseSort(threading.Thread):
         try:
             self.result = self.exec_request()
         except (OSError) as (e):
-             self.error = True
-             self.result = 'CSScomb Error: attempt to sort non-existent file'
+            self.error = True
+            self.result = 'Some OSError'
         except (urllib2.HTTPError) as (e):
             self.error = True
             self.result = 'CSScomb Error: HTTP error %s contacting API' % (str(e.code))

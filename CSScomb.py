@@ -1,5 +1,7 @@
-import sublime, sublime_plugin,sys
+import sublime
+import sublime_plugin
 from csscomb import HerokuSort, LocalSort
+
 
 class BaseSorter(sublime_plugin.TextCommand):
     """Base Sorter"""
@@ -14,7 +16,7 @@ class BaseSorter(sublime_plugin.TextCommand):
     def run(self, edit):
 
         selections = self.get_selections()
-        SorterCall = self.get_sorter();
+        SorterCall = self.get_sorter()
 
         threads = []
         for sel in selections:
@@ -52,7 +54,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         }
         return sorters[sorter] if sorter in sorters else sorters['hosted']
 
-    def handle_threads(self, edit, threads, selections, offset = 0, i = 0):
+    def handle_threads(self, edit, threads, selections, offset=0, i=0):
 
         next_threads = []
         for thread in threads:
@@ -71,13 +73,8 @@ class BaseSorter(sublime_plugin.TextCommand):
         self.view.end_edit(edit)
         sublime.status_message('Successfully sorted')
 
-
     def handle_result(self, edit, thread, selections, offset):
-        sel = thread.sel
-        original = thread.original
-        # print original
         result = thread.result
-        # print result
 
         if thread.error:
             sublime.error_message(result)
@@ -94,23 +91,23 @@ class CssSorter(BaseSorter):
     def handle_result(self, edit, thread, selections, offset):
         result = super(CssSorter, self).handle_result(edit, thread, selections, offset)
 
-        editgroup = self.view.begin_edit('csscomb')
-
         sel = thread.sel
-        result = unicode(thread.result,'utf-8')
+        result = unicode(thread.result, 'utf-8')
         # if offset:
             # sel = sublime.Region(thread.sel.begin() + offset, thread.sel.end() + offset)
 
         self.view.replace(edit, sel, result)
 
+
 class ChangeSorterToLocalCommand(sublime_plugin.WindowCommand):
-    def run(self, paths = []):
+    def run(self, paths=[]):
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         self.settings.set("sorter", "local")
         sublime.save_settings('CSScomb.sublime-settings')
 
+
 class ChangeSorterToHerokuCommand(sublime_plugin.WindowCommand):
-    def run(self, paths = []):
+    def run(self, paths=[]):
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         self.settings.set("sorter", "heroku")
         sublime.save_settings('CSScomb.sublime-settings')

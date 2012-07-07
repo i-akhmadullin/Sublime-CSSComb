@@ -1,6 +1,5 @@
-import sublime
-import sublime_plugin
-import sys,subprocess,os
+import subprocess
+import os
 from os import path
 
 from basesort import BaseSort
@@ -9,6 +8,7 @@ __file__ = path.normpath(path.abspath(__file__))
 __path__ = path.dirname(__file__)
 libs_path = path.join(__path__, 'libs')
 csscomb_path = path.join(libs_path, 'call_string.php')
+
 
 class LocalSort(BaseSort):
 
@@ -32,5 +32,5 @@ class LocalSort(BaseSort):
         try:
             self.result = self.exec_request()
         except (OSError) as (e):
-             self.error = True
-             self.result = 'Sorter Error: attempt to sort non-existent file'
+            self.error = True
+            self.result = 'Sorter Error: attempt to sort non-existent file'
