@@ -1,6 +1,5 @@
 import subprocess
-import os
-from os import path
+from os import path, name
 
 from basesort import BaseSort
 
@@ -11,17 +10,24 @@ csscomb_path = path.join(libs_path, 'call_string.php')
 
 
 class LocalSort(BaseSort):
+    startupinfo = None
+    if name == 'nt':
+        startupinfo = subprocess.STARTUPINFO()
+        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        startupinfo.wShowWindow = subprocess.SW_HIDE
+
+    def check_php_on_path(self):
+        try:
+            subprocess.call('php -v', shell=False, startupinfo=self.startupinfo)
+        except (OSError):
+            self.error = True
+            self.result = 'Unable find php.exe. Make sure it is available in your PATH.'
 
     def exec_request(self):
-        startupinfo = None
-        if os.name == 'nt':
-            startupinfo = subprocess.STARTUPINFO()
-            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            startupinfo.wShowWindow = subprocess.SW_HIDE
-
-        myprocess = subprocess.Popen(['php', csscomb_path, self.original], shell=False, stdout=subprocess.PIPE, startupinfo=startupinfo)
-        (sout, serr) = myprocess.communicate()
-        myprocess.wait()
+        if not self.error:
+            myprocess = subprocess.Popen(['php', csscomb_path, self.original], shell=False, stdout=subprocess.PIPE, startupinfo=self.startupinfo)
+            (sout, serr) = myprocess.communicate()
+            myprocess.wait()
 
         if len(sout) > 0:
             return sout
@@ -29,8 +35,9 @@ class LocalSort(BaseSort):
             return None
 
     def run(self):
+        self.check_php_on_path()
         try:
             self.result = self.exec_request()
-        except (OSError) as (e):
+        except (OSError):
             self.error = True
             self.result = 'Sorter Error: attempt to sort non-existent file'

@@ -1,6 +1,15 @@
+# coding: utf-8
+
 import sublime
 import sublime_plugin
 from csscomb import HerokuSort, LocalSort
+
+
+def to_unicode_or_bust(obj, encoding='utf-8'):
+    if isinstance(obj, basestring):
+        if not isinstance(obj, unicode):
+            obj = unicode(obj, encoding)
+    return obj
 
 
 class BaseSorter(sublime_plugin.TextCommand):
@@ -8,12 +17,12 @@ class BaseSorter(sublime_plugin.TextCommand):
 
     def __init__(self, view):
         self.view = view
+
+    def run(self, edit):
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         if not self.settings.has('sorter'):
             self.settings.set('sorter', 'local')
         sublime.save_settings('CSScomb.sublime-settings')
-
-    def run(self, edit):
 
         selections = self.get_selections()
         SorterCall = self.get_sorter()
@@ -92,11 +101,11 @@ class CssSorter(BaseSorter):
         result = super(CssSorter, self).handle_result(edit, thread, selections, offset)
 
         sel = thread.sel
-        result = unicode(thread.result, 'utf-8')
+        result = to_unicode_or_bust(thread.result)
         # if offset:
             # sel = sublime.Region(thread.sel.begin() + offset, thread.sel.end() + offset)
-
-        self.view.replace(edit, sel, result)
+        if not thread.error:
+            self.view.replace(edit, sel, result)
 
 
 class ChangeSorterToLocalCommand(sublime_plugin.WindowCommand):
@@ -104,6 +113,7 @@ class ChangeSorterToLocalCommand(sublime_plugin.WindowCommand):
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         self.settings.set("sorter", "local")
         sublime.save_settings('CSScomb.sublime-settings')
+        sublime.status_message('Switched to local php sorting')
 
 
 class ChangeSorterToHerokuCommand(sublime_plugin.WindowCommand):
@@ -111,3 +121,4 @@ class ChangeSorterToHerokuCommand(sublime_plugin.WindowCommand):
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         self.settings.set("sorter", "heroku")
         sublime.save_settings('CSScomb.sublime-settings')
+        sublime.status_message('Switched to server sorting')
