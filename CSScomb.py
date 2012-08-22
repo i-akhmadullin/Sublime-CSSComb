@@ -23,6 +23,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         if not self.settings.has('sorter'):
             self.settings.set('sorter', 'local')
         sublime.save_settings('CSScomb.sublime-settings')
+        sortorder = self.settings.get('sort_order')
 
         selections = self.get_selections()
         SorterCall = self.get_sorter()
@@ -31,7 +32,7 @@ class BaseSorter(sublime_plugin.TextCommand):
         for sel in selections:
             selbody = self.view.substr(sel)
             selbody = selbody.encode('utf-8')
-            thread = SorterCall(sel, selbody)
+            thread = SorterCall(sel, selbody, sortorder)
 
             threads.append(thread)
             thread.start()

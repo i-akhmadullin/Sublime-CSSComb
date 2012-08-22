@@ -4,9 +4,10 @@ import urllib2
 
 class BaseSort(threading.Thread):
 
-    def __init__(self, sel, original):
+    def __init__(self, sel, original, sortorder):
         self.sel = sel
         self.original = original
+        self.sortorder = sortorder
         self.result = None
         self.error = None
         threading.Thread.__init__(self)
