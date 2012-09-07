@@ -19,11 +19,16 @@ class BaseSorter(sublime_plugin.TextCommand):
         self.view = view
 
     def run(self, edit):
+        sortorder = ''
         self.settings = sublime.load_settings("CSScomb.sublime-settings")
         if not self.settings.has('sorter'):
             self.settings.set('sorter', 'local')
         sublime.save_settings('CSScomb.sublime-settings')
-        sortorder = self.settings.get('sort_order')
+
+        if self.settings.get('custom_sort_order') == True:
+            self.order_settings = sublime.load_settings("Order.sublime-settings")
+            sortorder = self.order_settings.get('sort_order')
+            sublime.status_message('Sorting with custom sort order...')
 
         selections = self.get_selections()
         SorterCall = self.get_sorter()

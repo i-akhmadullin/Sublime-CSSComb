@@ -7,6 +7,10 @@
                 "caption": "Sort CSS",
                 "command": "css_sorter"
             },
+            {
+                "caption": "csscombpy",
+                "command": "csscombpy"
+            },
             { "caption": "-" },
             {
                 "caption": "Switch to installed sorting",
