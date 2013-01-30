@@ -1,7 +1,0 @@
-{
-	// CSScomb sorter to use
-	// Accepted values are: heroku|hosted
-	"sorter": "hosted",
-	// Set your custom sort order in Order.sublime-settings
-	"custom_sort_order": true
-}
